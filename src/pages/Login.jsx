@@ -26,12 +26,13 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("")
   const [image, setImage] = useState(null)
-
+  
+//SignIn function 
    const signIn = async () => {
-    const imageFolderRef = ref(storage, `user-avatars/${image.name}`)
+    const imageFolderRef = ref(storage, `user-avatars/${image.name}`) //store in firebase storage
     try {
       await uploadBytes(imageFolderRef, image)
-      const imageUrl = await getDownloadURL(imageFolderRef);
+      const imageUrl = await getDownloadURL(imageFolderRef); //get image Url to store in firestore 
       const userCredential = await createUserWithEmailAndPassword(auth, `${username}@example.com`, password);
       await updateProfile(userCredential.user, { displayName: username });
       await setDoc(doc(db, 'users', username), { name: username, status: false, typing: false, avatar: imageUrl });
@@ -41,6 +42,8 @@ const Login = () => {
       toast.error('Username already taken')
     }
   }
+
+  //Login function 
   
   const login = async () => {
     try {
