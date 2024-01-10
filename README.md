@@ -1,8 +1,18 @@
-# React + Vite
+# React Firebase ChatApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+npm run dev - to run the app
+npm install 
 
-Currently, two official plugins are available:
+libraries/dependencies used - 
+ -Firebase
+ -Material-UI
+ -axios
+ -react-router-dom
+ -react-hot-toast
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ # Login/Register:-
+ 
+![ChatApp](https://github.com/Vishnu-VCheruvathery/Chat-App/assets/150216275/e43ef93b-4da5-49fe-b42b-788382bd52ca)
+
+# Main Page 
+![ChatApp2](https://github.com/Vishnu-VCheruvathery/Chat-App/assets/150216275/1005335f-a86e-4145-8d5c-737f9d596682)
