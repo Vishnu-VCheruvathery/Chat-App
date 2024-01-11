@@ -134,10 +134,14 @@ const Sidebar = ({onSelectUser}) => {
                     alignItems: 'center',
                   }}
                 >
+                   <div style={{display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center'}}>
+                 <Avatar src={u.avatar} />
                   <div>
                     <Typography variant="h5">{u.name}</Typography>
                     {u.typing ? (<Typography variant='subtitle2'>Typing....</Typography>) : null}
                   </div>
+  
+                 </div>
   
                   {u.status === true ? (
                     <Tooltip title='Online'>

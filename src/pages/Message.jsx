@@ -117,6 +117,7 @@ const Message = ({ selectedUser, close }) => {
                 position: 'relative',
               }}
             >
+             {/*When you want to stop or change the user you are conversing with */}
               <Button sx={{ fontSize: '1.8em' }} onClick={close}>
                 <ArrowCircleLeftIcon sx={{ color: 'black' }} />
               </Button>
