@@ -33,6 +33,7 @@ const Sidebar = ({onSelectUser}) => {
 
   const getUser = async () => {
     try {
+      //to find the user that matches the searchTerm
       const q = query(collection(db, 'users'), where('name', '==', searchTerm));
       const querySnapshot = await getDocs(q);
       const userResults = querySnapshot.docs.map(doc => doc.data());

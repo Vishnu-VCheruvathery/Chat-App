@@ -27,6 +27,7 @@ const Navbar = () => {
         const userSnapshot = await getDoc(doc(db, 'users', username));
         
         if (userSnapshot.exists()) {
+          //set the online status as false to show the user is offline 
           await updateDoc(doc(db, 'users', username), { status: false });
         } else {
           console.log('User document not found in Firestore');

@@ -50,7 +50,8 @@ const Message = ({ selectedUser, close }) => {
             toast.error("Enter valid message")
             return;
         }
-          await addDoc(collection(db, "conversations", conversationId, "messages"), {
+         //add in firestore 
+          await addDoc(collection(db, "conversations", conversationId, "messages"), { 
              id: username,
              sender: username,
              receiver: selectedUser?.name,
@@ -69,6 +70,7 @@ const Message = ({ selectedUser, close }) => {
             orderBy("createdAt", "desc")
           );
 
+        //to get the newest changes in the messages collection 
           const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const fetchedMessages = [];
             querySnapshot.forEach((doc) => {
@@ -95,7 +97,7 @@ const Message = ({ selectedUser, close }) => {
       return () => unsubscribe();
     }, []);
 
-
+    //scroll to the latest message 
     useEffect(() => {
        messageEndRef.current?.scrollIntoView();
     }, [incomingMessages])
