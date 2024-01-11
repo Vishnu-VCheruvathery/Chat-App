@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Stack, Tooltip, Typography } from '@mui/material'
 import {People, PersonSearch, ArrowBack, Circle} from '@mui/icons-material'
 import React, { useCallback, useEffect,useRef,useState } from 'react'
-import { getFirestore, collection, getDocs, getDoc, doc, query, where, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, query, where, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { Link } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -9,7 +9,6 @@ import toast from 'react-hot-toast';
 
 const Sidebar = ({onSelectUser}) => {
   const [users, setUsers] = useState([]);
-  const [view, setView] = useState(true)
   const [searchUsers, setSearchUsers] = useState([]);
   const [username, setUsername] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,7 +19,6 @@ const Sidebar = ({onSelectUser}) => {
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const usernames = querySnapshot.docs.map(doc => doc.data());
         const filteredUsers = usernames.filter(user => user.name !== username);
-        console.log(filteredUsers)
         setUsers(prevUsers => [...filteredUsers]);
       });
   

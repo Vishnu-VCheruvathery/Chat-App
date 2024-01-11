@@ -3,8 +3,7 @@ import {Toaster} from 'react-hot-toast'
 import './App.css'
 import Login from './pages/Login'
 import Chat from './pages/Chat'
-import Navbar from './components/Navbar'
-import Message from './pages/Message'
+
 
 function App() {
   

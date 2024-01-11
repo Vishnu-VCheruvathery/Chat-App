@@ -21,6 +21,8 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
+const blankPfp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png'
+
 const Login = () => {
   const navigate = useNavigate()
   const [username, setUsername] = useState("");
@@ -29,23 +31,29 @@ const Login = () => {
   
 //SignIn function 
    const signIn = async () => {
-    const imageFolderRef = ref(storage, `user-avatars/${image.name}`) //store in firebase storage
-    try {
-      await uploadBytes(imageFolderRef, image)
-      const imageUrl = await getDownloadURL(imageFolderRef); //get image Url to store in firestore 
-      const userCredential = await createUserWithEmailAndPassword(auth, `${username}@example.com`, password);
-      await updateProfile(userCredential.user, { displayName: username });
-      await setDoc(doc(db, 'users', username), { name: username, status: false, typing: false, avatar: imageUrl });
-      toast.success(`Register Successful`);
-    } catch (error) {
-      console.log(error);
-      toast.error('Username already taken')
+    if(username !== '' && password !== '' ){
+      const imageFolderRef = ref(storage, `user-avatars/${image ? image.name : username}`) //store in firebase storage
+      try {
+        await uploadBytes(imageFolderRef, image)
+        const imageUrl = await getDownloadURL(imageFolderRef); //get image Url to store in firestore 
+        const userCredential = await createUserWithEmailAndPassword(auth, `${username}@example.com`, password);
+        await updateProfile(userCredential.user, { displayName: username });
+        await setDoc(doc(db, 'users', username), { name: username, status: false, typing: false, avatar: imageUrl || blankPfp });
+        toast.success(`Register Successful`);
+      } catch (error) {
+        console.log(error);
+        toast.error('Username already taken')
+      }
+    } else {
+      toast.error('Please fill the required fields')
     }
+   
   }
 
   //Login function 
   
   const login = async () => {
+    if(username !== '' && password !== '' ){
     try {
       // Query Firestore to find the user document with the entered username
       const userSnapshot = await getDoc(doc(db, 'users', username));
@@ -72,6 +80,9 @@ const Login = () => {
       console.error(error);
       toast.error('User or password invalid');
     }
+  }else {
+    toast.error('Please fill the required fields')
+  }
   };
   
 
@@ -105,6 +116,7 @@ const Login = () => {
           borderRadius: '0.2em',
           fontSize: '1.2em',
         }}
+        required
         onChange={(e) => setUsername(e.target.value)}
       />
       <Typography variant='h6'>Password:</Typography>
@@ -120,6 +132,7 @@ const Login = () => {
           fontSize: '1.2em',
           marginBottom: '10px'
         }}
+        required
         onChange={(e) => setPassword(e.target.value)}
       />
     
